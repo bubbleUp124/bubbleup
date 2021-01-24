@@ -1,0 +1,33 @@
+<button (click)="launch()">Launch</button>
+<button (click)="add()">Add Airplane</button>
+<div *ngIf="addAirplane">
+  <div>
+    <label for="name">Airplane Name: </label>
+    <input type="text" [(ngModel)]="name" />
+  </div>
+  <div>
+    <label for="name">Type: </label>
+    <input type="text" [(ngModel)]="type" placeholder="Passenger or Cargo" />
+  </div>
+  <div>
+    <label for="name">Size: </label>
+    <input type="text" [(ngModel)]="size" placeholder="Small or Large" />
+  </div>
+
+  <button (click)="reset()">Cancel</button>
+  <button (click)="enqueue()">Enqueue</button>
+</div>
+<table class="table table-striped">
+  <tr>
+    <th class="">Name</th>
+    <th class="">Type</th>
+    <th class="">Size</th>
+    <th class="">Created Date</th>
+  </tr>
+  <tr *ngFor="let plane of aircraft$ | async | prioritizePipe">
+    <td>{{ plane.name }}</td>
+    <td>{{ plane.type }}</td>
+    <td>{{ plane.size }}</td>
+    <td>{{ plane.created_date | date: "medium" }}</td>
+  </tr>
+</table>
